@@ -26,14 +26,14 @@ const InfiniteTweetsList = () => {
     <InfiniteScroll
       dataLength={tweets.length}
       next={() => void fetchNextPage()}
-      hasMore={hasNextPage}
+      hasMore={hasNextPage ?? false}
       loader={<h4>Loading...</h4>}
     >
       {tweets.map((tweet) => (
         <div key={tweet.id} className="flex flex-col">
           <div className="flex items-center gap-2">
             <img
-              src={tweet.author.image}
+              src={tweet.author.image ?? undefined}
               alt="Profile Picture"
               className="h-12 w-12 rounded-full"
             />
