@@ -17,20 +17,21 @@ model Tweet {
     content   String
     createdAt DateTime @default(now())
     author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-    Like      Like[]
+    likes     Like[]
 
+    @@unique([createdAt, id])
     @@index([authorId])
 }
 
 model Like {
-    autherId String
+    authorId String
     tweetId  String
-    author   User   @relation(fields: [autherId], references: [id], onDelete: Cascade)
+    author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
     tweet    Tweet  @relation(fields: [tweetId], references: [id], onDelete: Cascade)
 
-    @@id([autherId, tweetId])
+    @@id([authorId, tweetId])
     @@index([tweetId])
-    @@index([autherId])
+    @@index([authorId])
 }
 
 // Necessary for Next auth
